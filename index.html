@@ -1,5 +1,5 @@
 <!DOCTYPE html> <html><head>
-        <title>Unit 6 Project</title>
+        <title>Movie/TV Show Rec.</title>
         <style>
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 </style>
@@ -4079,9 +4079,9 @@ button {
     font-family: 'Gloria Hallelujah', cursive;
 }
 img{
-    border: 5px solid yellow;
-    width:200px;
-    height:200px;
+    border: 2px solid black;
+    width:250px;
+    height:250px;
 }
 
 
@@ -4096,23 +4096,104 @@ img{
         <br>
         <p>Type in a genre below and we'll suggest some shows!</p>
 
-        <input placeholder="Comedy, action, or horror?">
-        <button>Submit!</button>
+        <input class="genre" placeholder="Comedy, action, or horror?">
+        <button class="submitButton">Submit!</button>
         <p>Want to suggest a show for us to include?</p>
-        <input placeholder="Provide img or url of a show!">
-        <button>Suggest!</button>
+        <input class="sugestions" placeholder="Provide img or url of a show!">
+        <div class="comedyContainer"></div>
+        <div class="actionContainer"></div>
+        <div class="horrorContainer"></div>
+        <button class="suggestionButton"> Suggest!</button>
         <div>
-        </div>
+        </div> 
+
     
+   
 <script>
 /*__POPCODESTART__*/
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 // Declare your genre arrays here
-var comedy = ["https://m.media-amazon.com/images/M/MV5BNGQwZjg5YmYtY2VkNC00NzliLTljYTctNzI5NmU3MjE2ODQzXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg", "https://upload.wikimedia.org/wikipedia/en/d/d4/Ted_%28film%29.png", "https://m.media-amazon.com/images/M/MV5BYTAzMmIwMWQtYjRjYy00NmM2LWIxYWUtY2NhYjMzZjc4ZGZmXkEyXkFqcGdeQXVyNDc3MzQ5Nzc@._V1_.jpg"],
-    action = ["https://m.media-amazon.com/images/M/MV5BZDA4YmE0OTYtMmRmNS00Mzk2LTlhM2MtNjk4NzBjZGE1MmIyXkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg", "https://m.media-amazon.com/images/I/51ClgbAfjgL.jpg", "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/C1C0181ED7342217394E5AC940003A8653E3311B6016194749B29A0FE3F238EB/scale?width=1200&aspectRatio=1.78&format=jpeg"],
-    horror = ["https://www.intransitbroadway.com/wp-content/uploads/2022/04/The-Conjuring-Movies-1024x489.png", "https://m.media-amazon.com/images/M/MV5BMTU4NzA4MDEwNF5BMl5BanBnXkFtZTgwMTQxODYzNjM@._V1_FMjpg_UX1000_.jpg", "https://froontrowmovies.files.wordpress.com/2015/08/the-dark-promise-of-sinister-2-in-one-single-image-347629.jpg"]; // Make sure to declare your HTML elements as variables! 
-// Submit Button 
+var comedy = ["https://m.media-amazon.com/images/M/MV5BNGQwZjg5YmYtY2VkNC00NzliLTljYTctNzI5NmU3MjE2ODQzXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg", "https://upload.wikimedia.org/wikipedia/en/d/d4/Ted_%28film%29.png", "https://m.media-amazon.com/images/M/MV5BYTAzMmIwMWQtYjRjYy00NmM2LWIxYWUtY2NhYjMzZjc4ZGZmXkEyXkFqcGdeQXVyNDc3MzQ5Nzc@._V1_.jpg"];
+var action = ["https://m.media-amazon.com/images/M/MV5BZDA4YmE0OTYtMmRmNS00Mzk2LTlhM2MtNjk4NzBjZGE1MmIyXkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg", "https://m.media-amazon.com/images/I/51ClgbAfjgL.jpg", "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/C1C0181ED7342217394E5AC940003A8653E3311B6016194749B29A0FE3F238EB/scale?width=1200&aspectRatio=1.78&format=jpeg"];
+var horror = ["https://www.intransitbroadway.com/wp-content/uploads/2022/04/The-Conjuring-Movies-1024x489.png", "https://m.media-amazon.com/images/M/MV5BMTU4NzA4MDEwNF5BMl5BanBnXkFtZTgwMTQxODYzNjM@._V1_FMjpg_UX1000_.jpg", "https://froontrowmovies.files.wordpress.com/2015/08/the-dark-promise-of-sinister-2-in-one-single-image-347629.jpg"];
+var suggestionArray = [];
+var suggestionButton = document.querySelector(".suggestionButton");
+var comedyContainer = document.querySelector(".comedyContainer");
+var actionContainer = document.querySelector(".actionContainer");
+var horrorContainer = document.querySelector(".horrorContainer"); //lol
 
 var submitButton = document.querySelector("button");
 
-submitButton.onclick = function () {};
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBvcGNvZGVQcmV2aWV3LmpzIl0sIm5hbWVzIjpbImNvbWVkeSIsImFjdGlvbiIsImhvcnJvciIsInN1Ym1pdEJ1dHRvbiIsImRvY3VtZW50IiwicXVlcnlTZWxlY3RvciIsIm9uY2xpY2siXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0EsSUFBSUEsTUFBTSxHQUFHLENBQUMsNElBQUQsRUFBOEksbUVBQTlJLEVBQW1OLCtIQUFuTixDQUFiO0FBQUEsSUFDSUMsTUFBTSxHQUFHLENBQUMsNElBQUQsRUFBK0kscURBQS9JLEVBQXNNLCtLQUF0TSxDQURiO0FBQUEsSUFFSUMsTUFBTSxHQUFHLENBQUMsZ0dBQUQsRUFBbUcsNEdBQW5HLEVBQWdOLG1IQUFoTixDQUZiLEMsQ0FJQTtBQUVBOztBQUVBLElBQUlDLFlBQVksR0FBR0MsUUFBUSxDQUFDQyxhQUFULENBQXVCLFFBQXZCLENBQW5COztBQUNBRixZQUFZLENBQUNHLE9BQWIsR0FBdUIsWUFBVyxDQUNqQyxDQUREIiwic291cmNlc0NvbnRlbnQiOlsiLy8gRGVjbGFyZSB5b3VyIGdlbnJlIGFycmF5cyBoZXJlXG5sZXQgY29tZWR5ID0gW1wiaHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL00vTVY1Qk5HUXdaamc1WW1ZdFkyVmtOQzAwTnpsaUxUbGpZVGN0TnpJNU5tVTNNakUyT0RRelhrRXlYa0ZxY0dkZVFYVnlOemt3TWpRNU56TUAuX1YxX0ZNanBnX1VYMTAwMF8uanBnXCIsXCJodHRwczovL3VwbG9hZC53aWtpbWVkaWEub3JnL3dpa2lwZWRpYS9lbi9kL2Q0L1RlZF8lMjhmaWxtJTI5LnBuZ1wiLCBcImh0dHBzOi8vbS5tZWRpYS1hbWF6b24uY29tL2ltYWdlcy9NL01WNUJZVEF6TW1Jd01XUXRZalJqWXkwME5tTTJMV0l4WVdVdFkyTmhZak16WmpjNFpHWm1Ya0V5WGtGcWNHZGVRWFZ5TkRjM016UTVOemNALl9WMV8uanBnXCJdXG4gICwgYWN0aW9uID0gW1wiaHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL00vTVY1QlpEQTRZbUUwT1RZdE1tUm1OUzAwTXprMkxUbGhNMk10TmprNE56QmpaR0UxTW1JeVhrRXlYa0ZxY0dkZVFYVnlNVE16TkRFeE9ERTUuX1YxX0ZNanBnX1VYMTAwMF8uanBnXCIsIFwiaHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNTFDbGdiQWZqZ0wuanBnXCIsIFwiaHR0cHM6Ly9wcm9kLXJpcGN1dC1kZWxpdmVyeS5kaXNuZXktcGx1cy5uZXQvdjEvdmFyaWFudC9kaXNuZXkvQzFDMDE4MUVENzM0MjIxNzM5NEU1QUM5NDAwMDNBODY1M0UzMzExQjYwMTYxOTQ3NDlCMjlBMEZFM0YyMzhFQi9zY2FsZT93aWR0aD0xMjAwJmFzcGVjdFJhdGlvPTEuNzgmZm9ybWF0PWpwZWdcIl1cbiAgLCBob3Jyb3IgPSBbXCJodHRwczovL3d3dy5pbnRyYW5zaXRicm9hZHdheS5jb20vd3AtY29udGVudC91cGxvYWRzLzIwMjIvMDQvVGhlLUNvbmp1cmluZy1Nb3ZpZXMtMTAyNHg0ODkucG5nXCIsIFwiaHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL00vTVY1Qk1UVTROekE0TURFd05GNUJNbDVCYW5CblhrRnRaVGd3TVRReE9EWXpOak1ALl9WMV9GTWpwZ19VWDEwMDBfLmpwZ1wiLFwiaHR0cHM6Ly9mcm9vbnRyb3dtb3ZpZXMuZmlsZXMud29yZHByZXNzLmNvbS8yMDE1LzA4L3RoZS1kYXJrLXByb21pc2Utb2Ytc2luaXN0ZXItMi1pbi1vbmUtc2luZ2xlLWltYWdlLTM0NzYyOS5qcGdcIl07XG5cbi8vIE1ha2Ugc3VyZSB0byBkZWNsYXJlIHlvdXIgSFRNTCBlbGVtZW50cyBhcyB2YXJpYWJsZXMhIFxuXG4vLyBTdWJtaXQgQnV0dG9uIFxuXG5sZXQgc3VibWl0QnV0dG9uID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcImJ1dHRvblwiKTsgXG5zdWJtaXRCdXR0b24ub25jbGljayA9IGZ1bmN0aW9uKCkge1xufTsgXG5cblxuIl19</script></body></html>
+submitButton.onclick = function () {
+  var genre = document.querySelector(".genre").value;
+  console.log("Submitted");
+
+  if (genre === "comedy") {
+    var _iterator = _createForOfIteratorHelper(comedy),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var comedymovie = _step.value;
+        comedyContainer.insertAdjacentHTML("afterbegin", "<img src=" + comedymovie + ">");
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  }
+
+  if (genre === "action") {
+    var _iterator2 = _createForOfIteratorHelper(action),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var actionmovie = _step2.value;
+        actionContainer.insertAdjacentHTML("afterbegin", "<img src=" + actionmovie + ">");
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+  }
+
+  if (genre === "horror") {
+    var _iterator3 = _createForOfIteratorHelper(horror),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var horrormovie = _step3.value;
+        horrorContainer.insertAdjacentHTML("afterbegin", "<img src=" + horrormovie + ">");
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
+  } else {
+    alert("CHOOSE FROM LIST or check spelling lolz");
+  }
+};
+
+suggestionButton.onclick = function () {
+  var sugestions = document.querySelector(".sugestions").value;
+
+  if (sugestions === "klown") {
+    alert("dvrk");
+  } else {
+    alert("THANK YOU FOR UR SUGGESTION!!");
+  }
+
+  suggestionArray.push(sugestions);
+  comedyContainer.insertAdjacentHTML("afterbegin", "<li>" + sugestions + "</li>");
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBvcGNvZGVQcmV2aWV3LmpzIl0sIm5hbWVzIjpbImNvbWVkeSIsImFjdGlvbiIsImhvcnJvciIsInN1Z2dlc3Rpb25BcnJheSIsInN1Z2dlc3Rpb25CdXR0b24iLCJkb2N1bWVudCIsInF1ZXJ5U2VsZWN0b3IiLCJjb21lZHlDb250YWluZXIiLCJhY3Rpb25Db250YWluZXIiLCJob3Jyb3JDb250YWluZXIiLCJzdWJtaXRCdXR0b24iLCJvbmNsaWNrIiwiZ2VucmUiLCJ2YWx1ZSIsImNvbnNvbGUiLCJsb2ciLCJjb21lZHltb3ZpZSIsImluc2VydEFkamFjZW50SFRNTCIsImFjdGlvbm1vdmllIiwiaG9ycm9ybW92aWUiLCJhbGVydCIsInN1Z2VzdGlvbnMiLCJwdXNoIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTtBQUNBLElBQUlBLE1BQU0sR0FBRyxDQUFDLDRJQUFELEVBQThJLG1FQUE5SSxFQUFtTiwrSEFBbk4sQ0FBYjtBQUNFLElBQUlDLE1BQU0sR0FBRyxDQUFDLDRJQUFELEVBQStJLHFEQUEvSSxFQUFzTSwrS0FBdE0sQ0FBYjtBQUNBLElBQUlDLE1BQU0sR0FBRyxDQUFDLGdHQUFELEVBQW1HLDRHQUFuRyxFQUFnTixtSEFBaE4sQ0FBYjtBQUVGLElBQUlDLGVBQWUsR0FBRyxFQUF0QjtBQUNBLElBQUlDLGdCQUFnQixHQUFHQyxRQUFRLENBQUNDLGFBQVQsQ0FBdUIsbUJBQXZCLENBQXZCO0FBQ0EsSUFBSUMsZUFBZSxHQUFHRixRQUFRLENBQUNDLGFBQVQsQ0FBdUIsa0JBQXZCLENBQXRCO0FBQ0EsSUFBSUUsZUFBZSxHQUFHSCxRQUFRLENBQUNDLGFBQVQsQ0FBdUIsa0JBQXZCLENBQXRCO0FBQ0EsSUFBSUcsZUFBZSxHQUFHSixRQUFRLENBQUNDLGFBQVQsQ0FBdUIsa0JBQXZCLENBQXRCLEMsQ0FDQTs7QUFDQSxJQUFJSSxZQUFZLEdBQUdMLFFBQVEsQ0FBQ0MsYUFBVCxDQUF1QixRQUF2QixDQUFuQjs7QUFDQUksWUFBWSxDQUFDQyxPQUFiLEdBQXVCLFlBQVc7QUFDakMsTUFBSUMsS0FBSyxHQUFFUCxRQUFRLENBQUNDLGFBQVQsQ0FBdUIsUUFBdkIsRUFBaUNPLEtBQTVDO0FBQ0dDLEVBQUFBLE9BQU8sQ0FBQ0MsR0FBUixDQUFZLFdBQVo7O0FBQ0EsTUFBSUgsS0FBSyxLQUFLLFFBQWQsRUFBd0I7QUFBQSwrQ0FDQ1osTUFERDtBQUFBOztBQUFBO0FBQ3RCLDBEQUE4QjtBQUFBLFlBQXRCZ0IsV0FBc0I7QUFDOUJULFFBQUFBLGVBQWUsQ0FBQ1Usa0JBQWhCLENBQW1DLFlBQW5DLEVBQWlELGNBQWNELFdBQWQsR0FBNEIsR0FBN0U7QUFBb0Y7QUFGOUQ7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUd2Qjs7QUFDRCxNQUFJSixLQUFLLEtBQUssUUFBZCxFQUF3QjtBQUFBLGdEQUNDWCxNQUREO0FBQUE7O0FBQUE7QUFDdEIsNkRBQThCO0FBQUEsWUFBdEJpQixXQUFzQjtBQUM5QlYsUUFBQUEsZUFBZSxDQUFDUyxrQkFBaEIsQ0FBbUMsWUFBbkMsRUFBaUQsY0FBY0MsV0FBZCxHQUE0QixHQUE3RTtBQUFvRjtBQUY5RDtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBRzNCOztBQUNHLE1BQUlOLEtBQUssS0FBSyxRQUFkLEVBQXdCO0FBQUEsZ0RBQ0NWLE1BREQ7QUFBQTs7QUFBQTtBQUN0Qiw2REFBOEI7QUFBQSxZQUF0QmlCLFdBQXNCO0FBQzlCVixRQUFBQSxlQUFlLENBQUNRLGtCQUFoQixDQUFtQyxZQUFuQyxFQUFpRCxjQUFjRSxXQUFkLEdBQTRCLEdBQTdFO0FBQW9GO0FBRjlEO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFHM0IsR0FIRyxNQUlLO0FBQ0hDLElBQUFBLEtBQUssQ0FBQyx5Q0FBRCxDQUFMO0FBQ0w7QUFDQSxDQWxCRDs7QUFvQkFoQixnQkFBZ0IsQ0FBQ08sT0FBakIsR0FBMkIsWUFBVztBQUNyQyxNQUFJVSxVQUFVLEdBQUdoQixRQUFRLENBQUNDLGFBQVQsQ0FBdUIsYUFBdkIsRUFBc0NPLEtBQXZEOztBQUNBLE1BQUlRLFVBQVUsS0FBSyxPQUFuQixFQUE0QjtBQUNyQkQsSUFBQUEsS0FBSyxDQUFFLE1BQUYsQ0FBTDtBQUNOLEdBRkQsTUFHSztBQUNFQSxJQUFBQSxLQUFLLENBQUUsK0JBQUYsQ0FBTDtBQUNIOztBQUNEakIsRUFBQUEsZUFBZSxDQUFDbUIsSUFBaEIsQ0FBcUJELFVBQXJCO0FBR0FkLEVBQUFBLGVBQWUsQ0FBQ1Usa0JBQWhCLENBQW1DLFlBQW5DLEVBQWlELFNBQVNJLFVBQVQsR0FBc0IsT0FBdkU7QUFDSCxDQVpEIiwic291cmNlc0NvbnRlbnQiOlsiLy8gRGVjbGFyZSB5b3VyIGdlbnJlIGFycmF5cyBoZXJlXG5sZXQgY29tZWR5ID0gW1wiaHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL00vTVY1Qk5HUXdaamc1WW1ZdFkyVmtOQzAwTnpsaUxUbGpZVGN0TnpJNU5tVTNNakUyT0RRelhrRXlYa0ZxY0dkZVFYVnlOemt3TWpRNU56TUAuX1YxX0ZNanBnX1VYMTAwMF8uanBnXCIsXCJodHRwczovL3VwbG9hZC53aWtpbWVkaWEub3JnL3dpa2lwZWRpYS9lbi9kL2Q0L1RlZF8lMjhmaWxtJTI5LnBuZ1wiLCBcImh0dHBzOi8vbS5tZWRpYS1hbWF6b24uY29tL2ltYWdlcy9NL01WNUJZVEF6TW1Jd01XUXRZalJqWXkwME5tTTJMV0l4WVdVdFkyTmhZak16WmpjNFpHWm1Ya0V5WGtGcWNHZGVRWFZ5TkRjM016UTVOemNALl9WMV8uanBnXCJdO1xuICBsZXQgYWN0aW9uID0gW1wiaHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL00vTVY1QlpEQTRZbUUwT1RZdE1tUm1OUzAwTXprMkxUbGhNMk10TmprNE56QmpaR0UxTW1JeVhrRXlYa0ZxY0dkZVFYVnlNVE16TkRFeE9ERTUuX1YxX0ZNanBnX1VYMTAwMF8uanBnXCIsIFwiaHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNTFDbGdiQWZqZ0wuanBnXCIsIFwiaHR0cHM6Ly9wcm9kLXJpcGN1dC1kZWxpdmVyeS5kaXNuZXktcGx1cy5uZXQvdjEvdmFyaWFudC9kaXNuZXkvQzFDMDE4MUVENzM0MjIxNzM5NEU1QUM5NDAwMDNBODY1M0UzMzExQjYwMTYxOTQ3NDlCMjlBMEZFM0YyMzhFQi9zY2FsZT93aWR0aD0xMjAwJmFzcGVjdFJhdGlvPTEuNzgmZm9ybWF0PWpwZWdcIl07XG4gIGxldCBob3Jyb3IgPSBbXCJodHRwczovL3d3dy5pbnRyYW5zaXRicm9hZHdheS5jb20vd3AtY29udGVudC91cGxvYWRzLzIwMjIvMDQvVGhlLUNvbmp1cmluZy1Nb3ZpZXMtMTAyNHg0ODkucG5nXCIsIFwiaHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL00vTVY1Qk1UVTROekE0TURFd05GNUJNbDVCYW5CblhrRnRaVGd3TVRReE9EWXpOak1ALl9WMV9GTWpwZ19VWDEwMDBfLmpwZ1wiLFwiaHR0cHM6Ly9mcm9vbnRyb3dtb3ZpZXMuZmlsZXMud29yZHByZXNzLmNvbS8yMDE1LzA4L3RoZS1kYXJrLXByb21pc2Utb2Ytc2luaXN0ZXItMi1pbi1vbmUtc2luZ2xlLWltYWdlLTM0NzYyOS5qcGdcIl07XG5cbmxldCBzdWdnZXN0aW9uQXJyYXkgPSBbXTtcbmxldCBzdWdnZXN0aW9uQnV0dG9uID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5zdWdnZXN0aW9uQnV0dG9uXCIpO1xubGV0IGNvbWVkeUNvbnRhaW5lciA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIuY29tZWR5Q29udGFpbmVyXCIpO1xubGV0IGFjdGlvbkNvbnRhaW5lciA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIuYWN0aW9uQ29udGFpbmVyXCIpO1xubGV0IGhvcnJvckNvbnRhaW5lciA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIuaG9ycm9yQ29udGFpbmVyXCIpO1xuLy9sb2xcbmxldCBzdWJtaXRCdXR0b24gPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiYnV0dG9uXCIpOyBcbnN1Ym1pdEJ1dHRvbi5vbmNsaWNrID0gZnVuY3Rpb24oKSB7XG4gbGV0IGdlbnJlPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLmdlbnJlXCIpLnZhbHVlO1xuICAgIGNvbnNvbGUubG9nKFwiU3VibWl0dGVkXCIpO1xuICAgIGlmIChnZW5yZSA9PT0gXCJjb21lZHlcIikge1xuICAgICAgZm9yKGxldCBjb21lZHltb3ZpZSBvZiBjb21lZHkpe1xuICAgICAgY29tZWR5Q29udGFpbmVyLmluc2VydEFkamFjZW50SFRNTChcImFmdGVyYmVnaW5cIiwgXCI8aW1nIHNyYz1cIiArIGNvbWVkeW1vdmllICsgXCI+XCIpOyB9XG4gICAgfSBcbiAgICBpZiAoZ2VucmUgPT09IFwiYWN0aW9uXCIpIHtcbiAgICAgIGZvcihsZXQgYWN0aW9ubW92aWUgb2YgYWN0aW9uKXtcbiAgICAgIGFjdGlvbkNvbnRhaW5lci5pbnNlcnRBZGphY2VudEhUTUwoXCJhZnRlcmJlZ2luXCIsIFwiPGltZyBzcmM9XCIgKyBhY3Rpb25tb3ZpZSArIFwiPlwiKTsgfVxufVxuICAgIGlmIChnZW5yZSA9PT0gXCJob3Jyb3JcIikge1xuICAgICAgZm9yKGxldCBob3Jyb3Jtb3ZpZSBvZiBob3Jyb3Ipe1xuICAgICAgaG9ycm9yQ29udGFpbmVyLmluc2VydEFkamFjZW50SFRNTChcImFmdGVyYmVnaW5cIiwgXCI8aW1nIHNyYz1cIiArIGhvcnJvcm1vdmllICsgXCI+XCIpOyB9XG59XG4gICAgZWxzZSB7XG4gICAgICBhbGVydChcIkNIT09TRSBGUk9NIExJU1Qgb3IgY2hlY2sgc3BlbGxpbmcgbG9selwiKTtcbn1cbn07XG4gICAgXG5zdWdnZXN0aW9uQnV0dG9uLm9uY2xpY2sgPSBmdW5jdGlvbigpIHtcblx0bGV0IHN1Z2VzdGlvbnMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnN1Z2VzdGlvbnNcIikudmFsdWU7XG5cdGlmIChzdWdlc3Rpb25zID09PSBcImtsb3duXCIpIHsgXG4gICAgICAgIGFsZXJ0IChcImR2cmtcIik7XG5cdH1cblx0ZWxzZSB7IFxuICAgICAgICBhbGVydCAoXCJUSEFOSyBZT1UgRk9SIFVSIFNVR0dFU1RJT04hIVwiKTtcbiAgICB9XG4gICAgc3VnZ2VzdGlvbkFycmF5LnB1c2goc3VnZXN0aW9ucyk7XG4gICAgXG4gICAgXG4gICAgY29tZWR5Q29udGFpbmVyLmluc2VydEFkamFjZW50SFRNTChcImFmdGVyYmVnaW5cIiwgXCI8bGk+XCIgKyBzdWdlc3Rpb25zICsgXCI8L2xpPlwiKTtcbn07XG4gICAgIl19</script></body></html>
